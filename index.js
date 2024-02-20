@@ -7,7 +7,9 @@ exports.handler = async (event, context) => {
   const headers = {
     "Content-Type": "application/json",
   };
+  
   try {
+    
     console.info("event data: " + JSON.stringify(event));
 
     switch (event.httpMethod + " " + event.resource) {
@@ -59,15 +61,7 @@ exports.handler = async (event, context) => {
 
       //If no route found output message with all even
       default:
-        throw new Error(
-          `Unsupported route: "${
-            event.httpMethod +
-            " " +
-            event.resource +
-            " - EVENT: " +
-            JSON.stringify(event)
-          }"`
-        );
+        throw new Error(`Unsupported route: "${event.httpMethod + " " + event.resource + " - EVENT: " + JSON.stringify(event) }"`);
     }
   } catch (err) {
     statusCode = 400;
